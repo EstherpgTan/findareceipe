@@ -1,5 +1,28 @@
-Rails.application.routes.draw do
-  get 'receipes/index'
+  # == Route Map
+  #
+  # Prefix Verb URI Pattern     Controller#Action
+  #   root GET  /               pages#home
+  #   home GET  /home(.:format) pages#home
+  #
+
+  Rails.application.routes.draw do
+
+    root 'pages#home'
+    get '/home' => 'pages#home'
+    get "/users/edit" => 'users#edit', :as => 'edit_user'
+
+    get "/recipes/search" => 'recipes#search', :as => 'search_recipes'
+    # resources :receipes, :except => [:edit]
+    # Create the CRUD urls for me (ignoring edit)
+
+    resources :recipes, :cuisines, :users
+
+    get "/login" => 'session#new', :as => 'login'
+    post "/login" => 'session#create'
+    delete "/login" => 'session#destroy'
+
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -55,4 +78,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

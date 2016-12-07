@@ -1,0 +1,48 @@
+<h1>
+  <%= @recipe.name %>
+</h1>
+
+<h3>Ingredients</h3>
+<p class="ingredients">
+  <%= @recipe.ingredients %>
+</p>
+
+<h3>Method</h3>
+<p class="method">
+  <%= @recipe.method %>
+</p>
+
+<% if @recipe.user_id %>
+  <h5>
+    This was posted by
+    <%= link_to( @recipe.user.name, user_path(@recipe.user.id) ) %>
+  </h5>
+<% end %>
+
+<% if @recipe.cuisine_id %>
+  <h5>
+    This is a part of the
+    <%= link_to( @recipe.cuisine.style, cuisine_path( @recipe.cuisine.id ) ) %>
+    cuisine.
+  </h5>
+<% end %>
+
+<% if @recipe.user == @current_user %>
+  <div class="controls">
+    <%= link_to "Edit Recipe", edit_recipe_path( @recipe.id ) %>
+    <%= link_to "Delete Recipe", recipe_path( @recipe.id ), method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>
+<!-- Link to the user who posted this recipe -->
+<!-- Link to the cuisine that this dish is a part of -->
+
+<!-- #  id          :integer          not null, primary key
+#  name        :string
+#  ingredients :text
+#  method      :text
+#  image       :string
+#  category    :string
+#  user_id     :integer
+#  cuisine_id  :integer
+#  created_at  :datetime
+#  updated_at  :datetime -->

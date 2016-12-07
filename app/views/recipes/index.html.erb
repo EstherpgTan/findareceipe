@@ -1,0 +1,14 @@
+<h1>All Recipes</h1>
+
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <h5>
+        <%= link_to( recipe.name, recipe_path( recipe.id ) ) %>
+      </h5>
+      <p>
+        <%= truncate( recipe.ingredients, length: 80 ) %>
+      </p>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,28 @@
+<%= form_for @recipe do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name, :required => true %>
+  </p>
+  <p>
+    <%= f.label :ingredients %>
+    <%= f.text_field :ingredients, :required => true %>
+  </p>
+  <p>
+    <%= f.label :method %>
+    <%= f.text_field :method, :required => true %>
+  </p>
+  <p>
+    <%= f.label :image %>
+    <%= f.url_field :image, :required => true %>
+  </p>
+  <p>
+    <%= f.label :category %>
+    <%= f.text_field :category, :required => true %>
+  </p>
+  <p>
+    <%= f.label :cuisine_id %>
+    <%= f.collection_select( :cuisine_id, Cuisine.all, :id, :style  ) %>
+  </p>
+
+  <%= f.submit %>
+<% end %>

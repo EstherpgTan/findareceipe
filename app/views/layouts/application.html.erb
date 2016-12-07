@@ -5,10 +5,87 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= cloudinary_js_config %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+  <% if flash[:success] %>
+      <h5><%= flash[:success] %></h5>
+    <% end %>
+    <% if flash[:error] %>
+      <h5><%= flash[:error] %></h5>
+    <% end %>
+    <h1><img src="http://res.cloudinary.com/esthertan/image/upload/v1480495181/broccoli.png"></a> find a receipe</h1>
+    <nav>
+      <%= link_to "RECEIPES", root_path %>></a> |
+      <%= link_to "HOME", root_path %> |
+      <%= link_to "ALL USERS", users_path %> |
+      <% unless @current_user.present? %>
+        <%= link_to "MEMBER: SIGN UP", new_user_path %> |
+        <%= link_to "LOGIN", login_path %>
+      <% else %>
+        <%= link_to "EDIT PROFILE", edit_user_path() %> |
+        <%= link_to "LOGOUT #{@current_user.email}", login_path, :method => :delete %>
+      <% end %>
+</nav>
+      <!-- TODO: Create routes and controller -->
+      <%= form_tag(search_recipes_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Recipes by keyword"%>
+          <%= submit_tag "Search",:name => nil%>
+      <% end %>
 
-<%= yield %>
+      <!-- <%# if @current_user.present? %>
+        <span>
+          You are logged in as <%#= @current_user.email %>
+        </span>
+      <%# end %> -->
 
-</body>
-</html>
+
+      <!-- SLIDER!!!! -->
+      <!-- <div class="slider">
+      <ul class="slides">
+        <li>
+          <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480480211/Seafood%20Paella.jpg">
+        </li>
+        <li>
+          <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480517075/Malaysian_Satay_l12z7w.jpg">
+        </li>
+        <li>
+          <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480518398/prawn-peach-and-goats-cheese-salad-118428-1_xdz5wr.jpg">
+        </li>
+        <li>
+          <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480520247/zucchini-haloumi-and-preserved-lemon-fritters-101162-1_jt1clb.jpg">
+        </li>
+      </ul>
+    </div> -->
+
+
+
+
+
+      <!-- <div id="slideshow">
+         <div>
+           <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480480211/Seafood%20Paella.jpg">
+         </div>
+         <div>
+           <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480517075/Malaysian_Satay_l12z7w.jpg">
+         </div>
+         <div>
+         <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480518398/prawn-peach-and-goats-cheese-salad-118428-1_xdz5wr.jpg">
+        </div>
+        <div>
+       <img src="http://res.cloudinary.com/esthertan/image/upload/c_scale,h_380,w_700/v1480520247/zucchini-haloumi-and-preserved-lemon-fritters-101162-1_jt1clb.jpg">
+       </div>
+        <div>
+        </div>
+        </div> -->
+
+        <div class="container">
+          <%= yield %>
+        </div>
+
+  </body>
+  </html>
+  <footer>
+    <p>Copyright 2016 find a receipe</p>
+  </footer>
